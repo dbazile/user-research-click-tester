@@ -10,14 +10,19 @@ import {serialize} from './store';
 serialize({
   tasks: [
     {
-      name: 'click any green box1',
-      instructions: `Yep, <strong>DO IT</strong>`,
-      url: require('../test/fixtures/green-boxes.png')
+      name: 'Click any one of the purple boxes',
+      instructions: 'Demonstration of landscape orientation',
+      url: require('../test/fixtures/desktop.png')
     },
     {
-      name: 'task 1',
-      instructions: `Make it so, Mr Sulu...`,
+      name: 'Again, click anywhere you want',
+      instructions: 'Demo of portrait orientation',
       url: require('../test/fixtures/purple-boxes.png')
+    },
+    {
+      name: 'Green Boxes',
+      instructions: 'Demo of portrait orientation',
+      url: require('../test/fixtures/green-boxes.png')
     }
   ]
 });
