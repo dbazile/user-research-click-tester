@@ -1,0 +1,36 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.column {
+  flex-grow: 1;
+  background-color: yellow;
+  box-sizing: border-box;
+}
+
+.viewport {
+  composes: column;
+  /*margin-left: calc((50% - 250px) / 2);*/
+  width: 50%;
+  padding: 100px;
+  background-color: rgba(0,0,0,.03);
+  text-align: right;
+}
+
+.viewport canvas {
+  display: inline-block;
+  /*max-width: 100%;*/
+  max-height: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow:
+    0 0 0  1px rgba(0,0,0,.2),
+    0 0 0 20px rgba(0,0,0,.1);
+}
+
+.sidebar {
+  composes: column;
+  width: 40%;
+}

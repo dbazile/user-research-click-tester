@@ -1,0 +1,10 @@
+@import './colors.css';
+@import './layout.css';
+@import './typography.css';
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
