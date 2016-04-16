@@ -1,7 +1,21 @@
 body {
-  color: #555;
+  background-color: white;
+  color: hsl(0, 0%, 40%);
 }
 
 .text {
-  color: #555;
+  color: hsl(0, 0%, 40%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #c9f;
+}
+
+.heading {
+  color: #caf;
 }
