@@ -26,13 +26,14 @@ module.exports = {
     loaders: [
       {test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/},
       {test: /\.css$/, loader: 'style!css?module&localIdentName=[name]__[local]'},
-      {test: /\.less$/, loader: 'style!css?module&localIdentName=[name]__[local]!less'},
       {test: /\.(png|jpg|gif)$/, loader: 'file'}
     ]
   },
 
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': `'${process.env.NODE_ENV || 'development'}'`
+    }),
     new HtmlWebpackPlugin({
       title: `${pkg.name} v${pkg.version}`,
       hash: true,

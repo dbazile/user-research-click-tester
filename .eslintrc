@@ -1,14 +1,19 @@
 {
-  "plugins": [],
-  "ecmaVersion": 6,
+  "plugins": ["react"],
+  "ecmaVersion": 7,
+  "parser": "babel-eslint",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
+  "extends": ["plugin:react/recommended"],
   "rules": {
     "comma-dangle": 1,
     "complexity": [1, 5],
