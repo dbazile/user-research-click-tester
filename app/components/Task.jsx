@@ -10,8 +10,6 @@ export default class Task extends Component {
   };
 
   componentDidMount() {
-    // fix canvas aspect ratio
-    // render into canvas
     const {canvas} = this.refs;
     const {url} = this.props;
     const image = new Image();
@@ -61,7 +59,7 @@ export default class Task extends Component {
     return (
       <li className={styles.root}>
         <section className={styles.viewport}>
-          <div className={styles.frame}><canvas ref="canvas"/></div>
+          <canvas ref="canvas"/>
         </section>
         <section className={styles.sidebar}>
           <h1 className={styles.name}>{this.props.name}</h1>
