@@ -31,15 +31,27 @@ export default class Task extends Component {
       context.save();
     });
 
-    const RADIUS = 50;
+    const RADIUS = 25;
     function handleClick(event) {
-      console.debug('clicked on canvas', event);
-      context.fillStyle = 'rgba(255, 0, 0, .5)';
+      const aspectRatio = (canvas.width / canvas.offsetWidth);
+      const scaledX = event.layerX * aspectRatio;
+      const scaledY = event.layerY * aspectRatio;
+      context.fillStyle = 'hsla(335, 75%, 50%, .3)';
+
+      context.lineWidth = 2;
+      context.strokeStyle = 'hsla(335, 75%, 50%, .7)';
       context.beginPath();
-      context.arc(event.x - Math.ceil(RADIUS / 2), event.y - Math.ceil(RADIUS / 2), RADIUS, 0, 2 * Math.PI);
+      context.arc(scaledX, scaledY, RADIUS, 0, 2 * Math.PI);
       context.closePath();
       context.fill();
-      canvas.removeEventListener('click', handleClick);
+      context.stroke();
+
+      context.lineWidth = 4;
+      context.strokeStyle = 'lime';
+      context.beginPath();
+      context.arc(scaledX, scaledY, Math.ceil(RADIUS * 1.4), 0, 2 * Math.PI);
+      context.closePath();
+      context.stroke();
     }
 
     canvas.addEventListener('click', handleClick);
