@@ -5,23 +5,28 @@
 }
 
 .column {
-  flex-grow: 1;
-  background-color: yellow;
-  box-sizing: border-box;
+  flex: 1;
 }
 
 .viewport {
   composes: column;
-  /*margin-left: calc((50% - 250px) / 2);*/
-  width: 50%;
-  padding: 100px;
+  position: relative;
   background-color: rgba(0,0,0,.03);
-  text-align: right;
 }
 
-.viewport canvas {
-  display: inline-block;
-  /*max-width: 100%;*/
+.frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 50px;
+  padding-bottom: 0;
+  text-align: center;
+}
+
+.frame canvas {
+  max-width: 100%;
   max-height: 100%;
   background-color: white;
   border-radius: 5px;
@@ -32,5 +37,4 @@
 
 .sidebar {
   composes: column;
-  width: 40%;
 }

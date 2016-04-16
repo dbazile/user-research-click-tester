@@ -48,13 +48,13 @@ export default class Task extends Component {
   render() {
     return (
       <li className={styles.root}>
-        <div className={styles.viewport}>
-          <canvas ref="canvas"/>
-        </div>
-        <div className={styles.sidebar}>
+        <section className={styles.viewport}>
+          <div className={styles.frame}><canvas ref="canvas"/></div>
+        </section>
+        <section className={styles.sidebar}>
           <h1 className={styles.name}>{this.props.name}</h1>
           <div dangerouslySetInnerHTML={{__html: this.props.instructions}}/>
-        </div>
+        </section>
       </li>
     );
   }
