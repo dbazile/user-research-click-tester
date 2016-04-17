@@ -11,6 +11,7 @@
   transition: ease .1s;
   transition-property: background-color color;
   overflow: hidden;
+  margin: 0;
 }
 
 .clicked + :not(.clicked) {
