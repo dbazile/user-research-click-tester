@@ -13,7 +13,7 @@ export default class Task extends Component {
 
   constructor() {
     super();
-    this.state = {clicked: false};
+    this.state = {clicked: false, redundantClicks: 0};
     this._onClick = this._onClick.bind(this);
   }
 
@@ -24,9 +24,9 @@ export default class Task extends Component {
 
   render() {
     /* eslint-disable react/no-danger */
-    const {clicked} = this.state;
+    const {clicked, redundantClicks} = this.state;
     return (
-      <li className={`${styles.root} ${clicked ? styles.clicked : ''}`}>
+      <li className={`${styles.root} ${clicked ? styles.clicked : ''} ${redundantClicks ? styles.abused : ''}`}>
         <section className={styles.viewport}>
           <canvas ref="canvas"/>
         </section>
@@ -34,8 +34,28 @@ export default class Task extends Component {
           <h1 className={styles.name}>{this.props.name}</h1>
           <div dangerouslySetInnerHTML={{__html: this.props.instructions}}/>
         </section>
+        <div className={styles.clickedMessage}>
+          <svg className={styles.thumbsUp} viewBox="-10 -10 220 220">
+            <path fillRule="evenodd" d="M100,200 C155.228475,200 200,155.228475 200,100 C200,44.771525 155.228475,-4.26325641e-14 100,-4.26325641e-14 C44.771525,-4.26325641e-14 1.42108547e-14,44.771525 1.42108547e-14,100 C1.42108547e-14,155.228475 44.771525,200 100,200 Z M115.625,37.5 L101.041667,81.25 L80.2083333,94.7916667 L39.5833333,97.9166667 L39.5833333,141.666667 L83.3333333,143.75 L154.166667,147.916667 L160.416667,105.208333 L151.041667,89.5833333 L129.980135,87.5 L132.063466,40.626196 L115.625,37.5 Z"/>
+          </svg>
+        </div>
+        <div className={styles.abuseMessage}>{this._abuseMessage}</div>
       </li>
     );
+  }
+
+  get _abuseMessage() {
+    const clicks = this.state.redundantClicks;
+    if (clicks < 2) { return 'Yup, we got it.'; }
+    else if (clicks < 3) { return 'Dude, we got it.'; }
+    else if (clicks < 4) { return '...'; }
+    else if (clicks < 5) { return 'Dude.'; }
+    else if (clicks < 6) { return 'Ok dude.'; }
+    else if (clicks < 7) { return 'Go. To. The. Next. Task.'; }
+    else if (clicks < 8) { return 'Dude...'; }
+    else if (clicks < 9) { return '...Dude...'; }
+    else if (clicks < 10) { return 'DUDE!'; }
+    return 'ಠ_ಠ';
   }
 
   _activateEventHandlers() {
@@ -84,6 +104,10 @@ export default class Task extends Component {
   //
 
   _onClick(event) {
+    if (this.state.clicked) {
+      this.setState({redundantClicks: this.state.redundantClicks + 1});
+      return;
+    }
     const {canvas} = this.refs;
     const aspectRatio = (canvas.width / canvas.offsetWidth);
     const scaledX = Math.floor(event.layerX * aspectRatio);
@@ -92,6 +116,5 @@ export default class Task extends Component {
     this._drawMarker(scaledX, scaledY, scaledRadius);
     this.props.onClick(scaledX, scaledY);
     this.setState({clicked: true});
-    canvas.removeEventListener('click', this._onClick);
   }
 }
