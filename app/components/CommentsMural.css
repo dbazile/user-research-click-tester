@@ -1,0 +1,29 @@
+.root {
+  fill: hsl(350, 50%, 50%);
+}
+
+.lip {
+  animation: blahblahblah .1s alternate linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.waveInner {
+  opacity: 0;
+  animation: blink 1s alternate linear infinite;
+}
+
+.waveOuter {
+  opacity: 0;
+  animation: blink 1s .5s alternate linear infinite;
+}
+
+@keyframes blahblahblah {
+  to { transform: scaleY(1.5); }
+}
+
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  51% { opacity: 1; }
+  100% { opacity: 1; }
+}
