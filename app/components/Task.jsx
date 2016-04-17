@@ -31,13 +31,13 @@ export default class Task extends Component {
     const clicked = !!this.props.click;
     return (
       <li id={this._slug} className={`${styles.root} ${clicked ? styles.clicked : ''} ${gratuitousClicks ? styles.abused : ''}`}>
-        <section className={styles.viewport}>
+        <div className={styles.viewport}>
           <canvas ref="canvas"/>
-        </section>
-        <section className={styles.sidebar}>
+        </div>
+        <div className={styles.description}>
           <h1 className={styles.name}>{this.props.name}</h1>
           <div dangerouslySetInnerHTML={{__html: this.props.instructions}}/>
-        </section>
+        </div>
         <div className={styles.clickedMessage}>
           <svg className={styles.thumbsUp} viewBox="-10 -10 220 220">
             <path fillRule="evenodd" d="M100,200 C155.228475,200 200,155.228475 200,100 C200,44.771525 155.228475,-4.26325641e-14 100,-4.26325641e-14 C44.771525,-4.26325641e-14 1.42108547e-14,44.771525 1.42108547e-14,100 C1.42108547e-14,155.228475 44.771525,200 100,200 Z M115.625,37.5 L101.041667,81.25 L80.2083333,94.7916667 L39.5833333,97.9166667 L39.5833333,141.666667 L83.3333333,143.75 L154.166667,147.916667 L160.416667,105.208333 L151.041667,89.5833333 L129.980135,87.5 L132.063466,40.626196 L115.625,37.5 Z"/>

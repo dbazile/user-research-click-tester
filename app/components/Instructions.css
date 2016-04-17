@@ -24,9 +24,13 @@ h1.heading {
   margin-top: 1.5em;
 }
 
-.mural {
+.muralContainer {
   flex: 1;
   width: 25%;
+}
+
+.mural {
+  width: 100%;
 }
 
 .content {

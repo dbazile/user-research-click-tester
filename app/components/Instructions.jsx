@@ -5,9 +5,9 @@ import styles from './Instructions.css';
 export default class Instructions extends Component {
   render() {
     return (
-      <div className={styles.root}>
-        <div className={styles.mural}>
-          <InstructionsMural/>
+      <section className={styles.root}>
+        <div className={styles.muralContainer}>
+          <InstructionsMural className={styles.mural}/>
         </div>
         <div className={styles.content}>
           <h1 className={styles.heading}>First-Click Testing</h1>
@@ -20,7 +20,7 @@ export default class Instructions extends Component {
           </ol>
           <h3 className={styles.begin}>Scroll down to begin!</h3>
         </div>
-      </div>
+      </section>
     );
   }
 }
