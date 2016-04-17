@@ -21,6 +21,7 @@ export default class Application extends Component {
   render() {
     return (
       <div className={styles.root}>
+        <Instructions/>
         <TaskList tasks={this.state.tasks} changed={this._tasksChanged} />
       </div>
     );

@@ -1,3 +1,33 @@
 .root {
-  color: red;
+  display: flex;
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #caf, white);
+  font-size: 3.25vh;
+  color: hsl(308, 17%, 60%);
+  font-weight: normal;
+  overflow: hidden;
+}
+
+.heading {
+  color: hsl(308, 31%, 47%);
+}
+
+h1.heading {
+  margin-bottom: .7em;
+  font-size: 4em;
+  letter-spacing: -.06em;
+  text-shadow: 0 4px hsla(283, 48%, 54%, 0.59);
+  color: hsl(0, 0%, 100%);
+}
+
+.mural {
+  flex: 1;
+  width: 25%;
+}
+
+.content {
+  flex: 2;
+  width: 75%;
+  padding: 0 5%;
+  align-self: center;
 }

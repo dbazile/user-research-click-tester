@@ -1,0 +1,41 @@
+.root {
+  width: 100%;
+  opacity: .7;
+}
+
+.label {
+  fill: hsla(308, 35%, 60%, .7);
+}
+
+.border {
+  fill: hsla(308, 25%, 50%, .2);
+}
+
+.background {
+  fill: transparent;
+}
+
+.cursor {
+  fill: white;
+  transition: opacity ease 10;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-duration: 4s;
+  animation-name: feed;
+  animation-iteration-count: infinite;
+  transform-origin: 0 0;
+}
+
+@keyframes feed {
+  0% { transform: translate(0, 0); }
+
+  30% { transform: translate(0, 0); }
+  60% { transform: translate(45px, 140px); }
+
+  70% { transform: translate(45px, 140px); }
+  75% { transform: translate(45px, 140px) scale(.95); }
+  80% { transform: translate(45px, 140px); }
+
+  80% { transform: translate(45px, 140px); }
+  100% { transform: translate(0, 0); }
+}
