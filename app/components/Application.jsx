@@ -3,7 +3,7 @@ import Instructions from './Instructions';
 import TaskList from './TaskList';
 import ThankYou from './ThankYou';
 import styles from './Application.css';
-import {serialize, deserialize}  from '../store';
+import {serialize, deserialize}  from '../utils/store';
 
 export default class Application extends Component {
   constructor() {

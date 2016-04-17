@@ -6,7 +6,7 @@ import Application from './components/Application';
 
 // DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
 // Seed store
-import {serialize} from './store';
+import {serialize} from './utils/store';
 serialize({
   tasks: [
     {

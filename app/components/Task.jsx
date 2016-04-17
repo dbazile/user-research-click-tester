@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import {generateSlug} from '../utils/generate-slug';
 import styles from './Task.css';
 
 const MARKER_RADIUS = 25;
 
 export default class Task extends Component {
   static propTypes = {
+    id: React.PropTypes.string.isRequired,
     url: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     instructions: React.PropTypes.string.isRequired,
@@ -26,7 +28,7 @@ export default class Task extends Component {
     /* eslint-disable react/no-danger */
     const {clicked, redundantClicks} = this.state;
     return (
-      <li className={`${styles.root} ${clicked ? styles.clicked : ''} ${redundantClicks ? styles.abused : ''}`}>
+      <li id={this._slug} className={`${styles.root} ${clicked ? styles.clicked : ''} ${redundantClicks ? styles.abused : ''}`}>
         <section className={styles.viewport}>
           <canvas ref="canvas"/>
         </section>
@@ -47,6 +49,10 @@ export default class Task extends Component {
   //
   // Internals
   //
+
+  get _slug() {
+    return generateSlug(this.props.id);
+  }
 
   get _abuseMessage() {
     const clicks = this.state.redundantClicks;
