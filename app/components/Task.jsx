@@ -124,8 +124,8 @@ export default class Task extends Component {
     const {canvas} = this.refs;
     const ratio = (canvas.width / canvas.offsetWidth);
     return {
-      x: Math.floor(event.offsetX * ratio),
-      y: Math.floor(event.offsetY * ratio),
+      x: Math.floor(offsetX * ratio),
+      y: Math.floor(offsetY * ratio),
       radius: Math.floor(radius * (ratio / 2))
     };
   }
