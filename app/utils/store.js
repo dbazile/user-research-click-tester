@@ -29,7 +29,6 @@ export function serialize(state) {
 function generateState() {
   console.debug('@store generateState');
   return {
-    tasks: [],
-
+    tasks: []
   };
 }
