@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Mural from './Mural';
+import InstructionsMural from './InstructionsMural';
 import styles from './Instructions.css';
 
 export default class Instructions extends Component {
@@ -7,7 +7,7 @@ export default class Instructions extends Component {
     return (
       <div className={styles.root}>
         <div className={styles.mural}>
-          <Mural/>
+          <InstructionsMural/>
         </div>
         <div className={styles.content}>
           <h1 className={styles.heading}>First-Click Testing</h1>

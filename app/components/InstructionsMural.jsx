@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Mural.css';
+import styles from './InstructionsMural.css';
 
-export default function Mural() {
+export default function InstructionsMural() {
   return (
     <svg className={styles.root} viewBox="20 0 160 300">
       <g className={styles.likeness}>

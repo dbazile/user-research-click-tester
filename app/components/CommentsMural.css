@@ -3,8 +3,8 @@
 }
 
 .lip {
-  animation: blahblahblah .1s alternate linear infinite;
   transform-origin: 50% 50%;
+  animation: blahblahblah .1s alternate linear infinite;
 }
 
 .waveInner {
