@@ -8,8 +8,8 @@
   flex-direction: row;
   height: 100vh;
   align-items: center;
-  transition: ease .1s;
-  transition-property: background-color color;
+  transition: ease .3s;
+  transition-property: background-color, color;
   overflow: hidden;
   margin: 0;
 }
