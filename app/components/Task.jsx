@@ -6,11 +6,12 @@ const MARKER_RADIUS = 25;
 
 export default class Task extends Component {
   static propTypes = {
+    click: React.PropTypes.object,
+    clicked: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
     instructions: React.PropTypes.string.isRequired,
-    clicked: React.PropTypes.func.isRequired
+    name: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired
   };
 
   constructor() {
@@ -57,16 +58,18 @@ export default class Task extends Component {
 
   get _abuseMessage() {
     const clicks = this.state.gratuitousClicks;
-    if (clicks < 2) { return 'Yup, we got it.'; }
-    else if (clicks < 3) { return 'Dude, we got it.'; }
-    else if (clicks < 4) { return '...'; }
-    else if (clicks < 5) { return 'Dude.'; }
-    else if (clicks < 6) { return 'Ok dude.'; }
-    else if (clicks < 7) { return 'Go. To. The. Next. Task.'; }
-    else if (clicks < 8) { return 'Dude...'; }
-    else if (clicks < 9) { return '...Dude...'; }
-    else if (clicks < 10) { return 'DUDE!'; }
-    return 'ಠ_ಠ';
+    switch (clicks) {
+      case 1: return 'Yup, we got it.';
+      case 2: return 'Dude, we got it.';
+      case 3: return '...';
+      case 4: return 'Dude.';
+      case 5: return 'Ok dude.';
+      case 6: return 'Go. To. The. Next. Task.';
+      case 7: return 'Dude...';
+      case 8: return '...Dude...';
+      case 9: return 'DUDE!';
+      default: return 'ಠ_ಠ';
+    }
   }
 
   _activateEventHandlers() {
