@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Instructions from './Instructions';
 import TaskList from './TaskList';
+import Comments from './Comments';
 import ThankYou from './ThankYou';
 import styles from './Application.css';
 import {serialize, deserialize}  from '../utils/store';
@@ -23,6 +24,7 @@ export default class Application extends Component {
       <div className={styles.root}>
         <Instructions/>
         <TaskList tasks={this.state.tasks} changed={this._tasksChanged} />
+        <Comments/>
       </div>
     );
   }
