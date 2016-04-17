@@ -44,6 +44,10 @@ export default class Task extends Component {
     );
   }
 
+  //
+  // Internals
+  //
+
   get _abuseMessage() {
     const clicks = this.state.redundantClicks;
     if (clicks < 2) { return 'Yup, we got it.'; }
