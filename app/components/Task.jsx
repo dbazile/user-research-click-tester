@@ -88,8 +88,7 @@ export default class Task extends Component {
     const scaledY = Math.floor(event.layerY * aspectRatio);
     const scaledRadius = Math.floor(MARKER_RADIUS * (aspectRatio / 2));
     this._drawMarker(scaledX, scaledY, scaledRadius);
-    console.debug('click event', event);
-    // this.props.onClick(event.offsetX * /  canvas.offsetWidth, event.offsetY / canvas);
+    this.props.onClick(scaledX, scaledY);
     // canvas.removeEventListener('click', this._onClick);
   }
 }
