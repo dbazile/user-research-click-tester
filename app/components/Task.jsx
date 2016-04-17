@@ -114,8 +114,8 @@ export default class Task extends Component {
     }
     const {canvas} = this.refs;
     const aspectRatio = (canvas.width / canvas.offsetWidth);
-    const scaledX = Math.floor(event.layerX * aspectRatio);
-    const scaledY = Math.floor(event.layerY * aspectRatio);
+    const scaledX = Math.floor(event.offsetX * aspectRatio);
+    const scaledY = Math.floor(event.offsetY * aspectRatio);
     const scaledRadius = Math.floor(MARKER_RADIUS * (aspectRatio / 2));
     this._drawMarker(scaledX, scaledY, scaledRadius);
     this.props.onClick(scaledX, scaledY);
