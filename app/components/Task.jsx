@@ -13,6 +13,7 @@ export default class Task extends Component {
 
   constructor() {
     super();
+    this.state = {clicked: false};
     this._onClick = this._onClick.bind(this);
   }
 
@@ -23,8 +24,9 @@ export default class Task extends Component {
 
   render() {
     /* eslint-disable react/no-danger */
+    const {clicked} = this.state;
     return (
-      <li className={styles.root}>
+      <li className={`${styles.root} ${clicked ? styles.clicked : ''}`}>
         <section className={styles.viewport}>
           <canvas ref="canvas"/>
         </section>
@@ -89,6 +91,7 @@ export default class Task extends Component {
     const scaledRadius = Math.floor(MARKER_RADIUS * (aspectRatio / 2));
     this._drawMarker(scaledX, scaledY, scaledRadius);
     this.props.onClick(scaledX, scaledY);
-    // canvas.removeEventListener('click', this._onClick);
+    this.setState({clicked: true});
+    canvas.removeEventListener('click', this._onClick);
   }
 }
