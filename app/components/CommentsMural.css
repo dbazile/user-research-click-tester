@@ -3,8 +3,7 @@
 }
 
 .lip {
-  transform-origin: 50% 50%;
-  animation: blahblahblah .1s alternate linear infinite;
+  animation: blahblahblah .175s alternate linear infinite;
 }
 
 .waveInner {
@@ -18,7 +17,7 @@
 }
 
 @keyframes blahblahblah {
-  to { transform: scaleY(1.5); }
+  to { transform: translateY(2px); }
 }
 
 @keyframes blink {
