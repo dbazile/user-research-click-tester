@@ -2,7 +2,7 @@
   display: flex;
   height: 100vh;
   background-image: linear-gradient(to bottom, #caf, white);
-  font-size: 3.25vh;
+  font-size: 3vh;
   color: hsl(308, 17%, 60%);
   font-weight: normal;
   overflow: hidden;
@@ -17,7 +17,11 @@ h1.heading {
   font-size: 4em;
   letter-spacing: -.06em;
   text-shadow: 0 4px hsla(283, 48%, 54%, 0.59);
-  color: hsl(0, 0%, 100%);
+  color: white;
+}
+
+.begin {
+  margin-top: 1.5em;
 }
 
 .mural {

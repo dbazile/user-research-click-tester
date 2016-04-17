@@ -63,3 +63,7 @@ ol {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+li + li {
+  margin-top: .5em;
+}

@@ -15,8 +15,10 @@ export default class Instructions extends Component {
           <p>Click the area of the interface that will let you accomplish each task.  It's that simple!</p>
           <h3 className={styles.heading}>A few things to remember...</h3>
           <ol>
-            <li>We're testing the interfaces, <em>not you</em>!  Don't worry about making mistakes.</li>
+            <li>You only need to click the interface once.</li>
+            <li>Don't worry about making mistakes.  We're testing the interfaces, <em>not you</em>!</li>
           </ol>
+          <h3 className={styles.begin}>Scroll down to begin!</h3>
         </div>
       </div>
     );
