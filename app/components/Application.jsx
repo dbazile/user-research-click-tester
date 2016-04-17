@@ -13,6 +13,7 @@ export default class Application extends Component {
     super();
     this.state = deserialize();
     this._tasksChanged = this._tasksChanged.bind(this);
+    this._commentsChanged = this._commentsChanged.bind(this);
   }
 
   componentDidUpdate() {
@@ -24,7 +25,8 @@ export default class Application extends Component {
       <div className={styles.root}>
         <Instructions/>
         <TaskList tasks={this.state.tasks} changed={this._tasksChanged} />
-        <Comments/>
+        <Comments comments={this.state.comments} changed={this._commentsChanged}/>
+        <ThankYou/>
       </div>
     );
   }
@@ -32,6 +34,10 @@ export default class Application extends Component {
   _tasksChanged(tasks) {
     this.setState({tasks});
     this._scrollToNext();
+  }
+
+  _commentsChanged(comments) {
+    this.setState({comments});
   }
 
   _scrollToNext() {
