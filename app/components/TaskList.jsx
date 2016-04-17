@@ -14,7 +14,7 @@ export default class TaskList extends Component {
         {this.props.tasks.map(task =>
           <Task {...task}
                 key={task.id}
-                onClick={(x, y) => this.props.onTaskClick({x, y, id: task.id})} />
+                onClick={(x, y) => this.props.onTaskClick({x, y, task})} />
         )}
       </ul>
     );

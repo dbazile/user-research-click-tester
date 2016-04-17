@@ -24,8 +24,8 @@ export default class Application extends Component {
     );
   }
 
-  _onTaskClicked({id, x, y}) {
-    console.debug('task clicked: ', [id, x, y]);
+  _onTaskClicked({task, x, y}) {
+    console.debug('task clicked: ', [task.id, x, y]);
   }
 }
 
