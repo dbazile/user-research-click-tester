@@ -15,7 +15,7 @@ export default class Task extends Component {
 
   constructor() {
     super();
-    this.state = {clicked: false, redundantClicks: 0};
+    this.state = {gratuitousClicks: 0};
     this._clicked = this._clicked.bind(this);
   }
 
@@ -26,9 +26,10 @@ export default class Task extends Component {
 
   render() {
     /* eslint-disable react/no-danger */
-    const {clicked, redundantClicks} = this.state;
+    const {gratuitousClicks} = this.state;
+    const clicked = !!this.props.click;
     return (
-      <li id={this._slug} className={`${styles.root} ${clicked ? styles.clicked : ''} ${redundantClicks ? styles.abused : ''}`}>
+      <li id={this._slug} className={`${styles.root} ${clicked ? styles.clicked : ''} ${gratuitousClicks ? styles.abused : ''}`}>
         <section className={styles.viewport}>
           <canvas ref="canvas"/>
         </section>
@@ -55,7 +56,7 @@ export default class Task extends Component {
   }
 
   get _abuseMessage() {
-    const clicks = this.state.redundantClicks;
+    const clicks = this.state.gratuitousClicks;
     if (clicks < 2) { return 'Yup, we got it.'; }
     else if (clicks < 3) { return 'Dude, we got it.'; }
     else if (clicks < 4) { return '...'; }
@@ -82,6 +83,7 @@ export default class Task extends Component {
       canvas.width = image.width;
       canvas.height = image.height;
       context.drawImage(image, 0, 0);
+      this._restoreMarkerIfClicked();
       context.save();
     });
   }
@@ -109,22 +111,36 @@ export default class Task extends Component {
     context.stroke();
   }
 
+  _restoreMarkerIfClicked() {
+    const {click} = this.props;
+    if (click) {
+      const {radius} = this._scale(0, 0, MARKER_RADIUS);
+      const [x, y] = click;
+      this._drawMarker(x, y, radius);
+    }
+  }
+
+  _scale(offsetX, offsetY, radius) {
+    const {canvas} = this.refs;
+    const ratio = (canvas.width / canvas.offsetWidth);
+    return {
+      x: Math.floor(event.offsetX * ratio),
+      y: Math.floor(event.offsetY * ratio),
+      radius: Math.floor(radius * (ratio / 2))
+    };
+  }
+
   //
   // Events
   //
 
   _clicked(event) {
-    if (this.state.clicked) {
-      this.setState({redundantClicks: this.state.redundantClicks + 1});
+    if (this.props.click) {
+      this.setState({gratuitousClicks: this.state.gratuitousClicks + 1});
       return;
     }
-    const {canvas} = this.refs;
-    const aspectRatio = (canvas.width / canvas.offsetWidth);
-    const scaledX = Math.floor(event.offsetX * aspectRatio);
-    const scaledY = Math.floor(event.offsetY * aspectRatio);
-    const scaledRadius = Math.floor(MARKER_RADIUS * (aspectRatio / 2));
-    this._drawMarker(scaledX, scaledY, scaledRadius);
-    this.props.clicked(scaledX, scaledY);
-    this.setState({clicked: true});
+    const {x, y, radius} = this._scale(event.offsetX, event.offsetY, MARKER_RADIUS);
+    this._drawMarker(x, y, radius);
+    this.props.clicked(x, y);
   }
 }
