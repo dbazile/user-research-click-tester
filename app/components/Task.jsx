@@ -1,61 +1,28 @@
 import React, {Component} from 'react';
 import styles from './Task.css';
 
+const MARKER_RADIUS = 25;
+
 export default class Task extends Component {
   static propTypes = {
-    url: React.PropTypes.string,
-    name: React.PropTypes.string,
-    instructions: React.PropTypes.string,
-    onClick: React.PropTypes.func
+    url: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+    instructions: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func.isRequired
   };
 
+  constructor() {
+    super();
+    this._onClick = this._onClick.bind(this);
+  }
+
   componentDidMount() {
-    const {canvas} = this.refs;
-    const {url} = this.props;
-    const image = new Image();
-    image.crossOrigin = 'anonymous';
-    image.src = this.props.url;
-
-    // DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
-    window.canvas = canvas;
-    // DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
-
-    const context = canvas.getContext('2d');
-
-    image.addEventListener('load', event => {
-      canvas.width = image.width;
-      canvas.height = image.height;
-      context.drawImage(image, 0, 0);
-      context.save();
-    });
-
-    const RADIUS = 25;
-    function handleClick(event) {
-      const aspectRatio = (canvas.width / canvas.offsetWidth);
-      const scaledX = event.layerX * aspectRatio;
-      const scaledY = event.layerY * aspectRatio;
-      context.fillStyle = 'hsla(335, 75%, 50%, .3)';
-
-      context.lineWidth = 2;
-      context.strokeStyle = 'hsla(335, 75%, 50%, .7)';
-      context.beginPath();
-      context.arc(scaledX, scaledY, RADIUS, 0, 2 * Math.PI);
-      context.closePath();
-      context.fill();
-      context.stroke();
-
-      context.lineWidth = 4;
-      context.strokeStyle = 'lime';
-      context.beginPath();
-      context.arc(scaledX, scaledY, Math.ceil(RADIUS * 1.4), 0, 2 * Math.PI);
-      context.closePath();
-      context.stroke();
-    }
-
-    canvas.addEventListener('click', handleClick);
+    this._loadImage();
+    this._activateEventHandlers();
   }
 
   render() {
+    /* eslint-disable react/no-danger */
     return (
       <li className={styles.root}>
         <section className={styles.viewport}>
@@ -67,5 +34,67 @@ export default class Task extends Component {
         </section>
       </li>
     );
+  }
+
+  _activateEventHandlers() {
+    this.refs.canvas.addEventListener('click', this._onClick);
+  }
+
+  _loadImage() {
+    const {canvas} = this.refs;
+    const context = canvas.getContext('2d');
+    const image = new Image();
+    image.crossOrigin = 'anonymous';
+    image.src = this.props.url;
+    image.addEventListener('load', () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      context.drawImage(image, 0, 0);
+      context.save();
+    });
+  }
+
+  _drawMarker(x, y, radius) {
+    const {canvas} = this.refs;
+    const context = canvas.getContext('2d');
+
+    // Normalize
+    const normalizedX = Math.floor(x);
+    const normalizedY = Math.floor(y);
+    const normalizedRadius = Math.floor(radius);
+
+    // Inside
+    context.fillStyle = 'hsla(335, 75%, 50%, .3)';
+    context.lineWidth = Math.ceil(radius * .12);
+    context.strokeStyle = 'hsla(335, 75%, 50%, .7)';
+    context.beginPath();
+    context.arc(normalizedX, normalizedY, normalizedRadius, 0, 2 * Math.PI);
+    context.closePath();
+    context.fill();
+    context.stroke();
+
+    // Outside
+    context.lineWidth = Math.ceil(radius * .18);
+    context.strokeStyle = 'lime';
+    context.beginPath();
+    context.arc(normalizedX, normalizedY, Math.ceil(normalizedRadius * 1.4), 0, 2 * Math.PI);
+    context.closePath();
+    context.stroke();
+  }
+
+  //
+  // Events
+  //
+
+  _onClick(event) {
+    const {canvas} = this.refs;
+    const aspectRatio = (canvas.width / canvas.offsetWidth);
+    const scaledX = event.layerX * aspectRatio;
+    const scaledY = event.layerY * aspectRatio;
+    const scaledRadius = MARKER_RADIUS * (aspectRatio / 2);
+    this._drawMarker(scaledX, scaledY, scaledRadius);
+    console.debug('click event', event);
+    // this.props.onClick(event.offsetX * /  canvas.offsetWidth, event.offsetY / canvas);
+    // canvas.removeEventListener('click', this._onClick);
   }
 }
