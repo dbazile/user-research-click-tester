@@ -10,13 +10,13 @@ export default class Task extends Component {
     url: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     instructions: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func.isRequired
+    clicked: React.PropTypes.func.isRequired
   };
 
   constructor() {
     super();
     this.state = {clicked: false, redundantClicks: 0};
-    this._onClick = this._onClick.bind(this);
+    this._clicked = this._clicked.bind(this);
   }
 
   componentDidMount() {
@@ -69,7 +69,7 @@ export default class Task extends Component {
   }
 
   _activateEventHandlers() {
-    this.refs.canvas.addEventListener('click', this._onClick);
+    this.refs.canvas.addEventListener('click', this._clicked);
   }
 
   _loadImage() {
@@ -113,7 +113,7 @@ export default class Task extends Component {
   // Events
   //
 
-  _onClick(event) {
+  _clicked(event) {
     if (this.state.clicked) {
       this.setState({redundantClicks: this.state.redundantClicks + 1});
       return;
@@ -124,7 +124,7 @@ export default class Task extends Component {
     const scaledY = Math.floor(event.offsetY * aspectRatio);
     const scaledRadius = Math.floor(MARKER_RADIUS * (aspectRatio / 2));
     this._drawMarker(scaledX, scaledY, scaledRadius);
-    this.props.onClick(scaledX, scaledY);
+    this.props.clicked(scaledX, scaledY);
     this.setState({clicked: true});
   }
 }

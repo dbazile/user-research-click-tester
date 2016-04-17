@@ -9,7 +9,7 @@ export default class Application extends Component {
   constructor() {
     super();
     this.state = deserialize();
-    this._onTaskClicked = this._onTaskClicked.bind(this);
+    this._tasksChanged = this._tasksChanged.bind(this);
   }
 
   componentDidUpdate() {
@@ -19,13 +19,13 @@ export default class Application extends Component {
   render() {
     return (
       <div className={styles.root}>
-        <TaskList tasks={this.state.tasks} onTaskClick={this._onTaskClicked} />
+        <TaskList tasks={this.state.tasks} changed={this._tasksChanged} />
       </div>
     );
   }
 
-  _onTaskClicked({task, x, y}) {
-    console.debug('task clicked: ', [task.id, x, y]);
+  _tasksChanged(tasks) {
+    this.setState({tasks});
   }
 }
 

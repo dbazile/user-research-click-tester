@@ -5,7 +5,7 @@ import styles from './TaskList.css';
 export default class TaskList extends Component {
   static propTypes = {
     tasks: React.PropTypes.array.isRequired,
-    onTaskClick: React.PropTypes.func.isRequired
+    changed: React.PropTypes.func.isRequired
   };
 
   render() {
@@ -14,9 +14,14 @@ export default class TaskList extends Component {
         {this.props.tasks.map(task =>
           <Task {...task}
                 key={task.id}
-                onClick={(x, y) => this.props.onTaskClick({x, y, task})} />
+                clicked={(x, y) => this._clicked({x, y, task})} />
         )}
       </ul>
     );
+  }
+
+  _clicked({task, x, y}) {
+    const {changed, tasks} = this.props;
+    changed(tasks.map(t => t.id === task.id ? Object.assign({}, task, {click: [x, y]}) : t));
   }
 }
