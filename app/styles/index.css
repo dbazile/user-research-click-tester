@@ -9,3 +9,9 @@ body {
   height: 100%;
   cursor: default;
 }
+
+button,
+input,
+textarea {
+  outline: none;
+}

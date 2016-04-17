@@ -56,7 +56,7 @@ export default class Task extends Component {
     return generateSlug(this.props.id);
   }
 
-  get _abuseMessage() {
+  get _abuseMessage() {  // eslint-disable-line complexity
     const clicks = this.state.gratuitousClicks;
     switch (clicks) {
       case 1: return 'Yup, we got it.';
