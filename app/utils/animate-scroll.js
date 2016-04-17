@@ -1,11 +1,12 @@
 const LITERALLY_A_MAGIC_NUMBER = 8;
+const DELAY = 500;
 
 export function animateScroll(element) {
   const destination = element.offsetTop;
   let safety = 100;
   let handle;
 
-  requestAnimationFrame(tick);
+  const delay = setTimeout(() => requestAnimationFrame(tick), DELAY);
 
   function tick() {
     safety -= 1;
@@ -22,6 +23,7 @@ export function animateScroll(element) {
   }
 
   function cancel() {
+    clearTimeout(delay);
     cancelAnimationFrame(handle);
   }
 
