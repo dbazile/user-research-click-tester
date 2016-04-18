@@ -1,3 +1,5 @@
+import TASKS from '../../tasks.json';
+
 const SERIALIZATION_KEY = 'state'
 
 export function clear() {
@@ -30,7 +32,6 @@ function generateState() {
   console.debug('@store generateState');
   return {
     comments: '',
-    tasks: [
-    ]
+    tasks: TASKS
   };
 }
