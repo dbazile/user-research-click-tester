@@ -6,7 +6,7 @@ const MARKER_RADIUS = 25;
 
 export default class Task extends Component {
   static propTypes = {
-    click: React.PropTypes.object,
+    click: React.PropTypes.array,
     clicked: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
     instructions: React.PropTypes.string.isRequired,
