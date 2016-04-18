@@ -10,6 +10,15 @@ module.exports = {
   entry: './index.js',
   devtool: 'source-map',
 
+  devServer: {
+    proxy: {
+      '/responses': {
+        target: 'http://click-testing.andsoitcontinues.com',
+        changeOrigin: true
+      }
+    }
+  },
+
   resolve: {
     extensions: ['', '.js', '.jsx']
   },

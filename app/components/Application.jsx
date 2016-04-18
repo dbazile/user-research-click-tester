@@ -14,6 +14,7 @@ export default class Application extends Component {
     this.state = deserialize();
     this._tasksChanged = this._tasksChanged.bind(this);
     this._commentsChanged = this._commentsChanged.bind(this);
+    this._transmit = this._transmit.bind(this);
   }
 
   componentDidUpdate() {
@@ -26,7 +27,7 @@ export default class Application extends Component {
         <Instructions/>
         <TaskList tasks={this.state.tasks} changed={this._tasksChanged} />
         <Comments comments={this.state.comments} changed={this._commentsChanged}/>
-        <ThankYou/>
+        <ThankYou transmit={this._transmit}/>
       </div>
     );
   }
@@ -48,5 +49,16 @@ export default class Application extends Component {
       if (this._cancelScroll) {this._cancelScroll();}
       this._cancelScroll = animateScroll(document.querySelector(hash));
     }
+  }
+
+  _transmit() {
+    fetch('/responses', {
+      method: 'post',
+      body: JSON.stringify(this.state)
+    }).then(response => response.ok && this._notifySuccess());
+  }
+
+  _notifySuccess() {
+    alert('whee!');
   }
 }
