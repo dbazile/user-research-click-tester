@@ -1,5 +1,3 @@
-import TASKS from '../../tasks.json';
-
 const SERIALIZATION_KEY = 'state'
 
 export function clear() {
@@ -32,6 +30,25 @@ function generateState() {
   console.debug('@store generateState');
   return {
     comments: '',
-    tasks: TASKS
+    tasks: [
+      {
+        "id": "alpha",
+        "name": "Click any one of the purple boxes",
+        "instructions": "Demonstration of landscape orientation",
+        "url": "/test/fixtures/desktop.png"
+      },
+      {
+        "id": "bravo",
+        "name": "Again, click anywhere you want",
+        "instructions": "Demo of portrait orientation",
+        "url": "/test/fixtures/purple-boxes.png"
+      },
+      {
+        "id": "charlie",
+        "name": "Green Boxes",
+        "instructions": "Demo of portrait orientation",
+        "url": "/test/fixtures/green-boxes.png"
+      }
+    ]
   };
 }
