@@ -6,7 +6,7 @@ An extremely spartan harness for conducting first-click testing.  I wrote this f
 
 It's intended to be forked and extended to run whatever test you're looking to perform.
 
-http://first-click-testing.andsoitcontinues.com/
+http://click-testing.andsoitcontinues.com/
 
 # Running
 
