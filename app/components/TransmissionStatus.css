@@ -1,0 +1,64 @@
+.root {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+}
+
+.transmitting,
+.success,
+.failed {
+  display: flex;
+}
+
+.root > * {
+  flex: 1;
+}
+
+.root button {
+  margin-top: 4em;
+  background-color: transparent;
+  border: 2px solid white;
+  padding: 1em 2em;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  color: inherit;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.root button:hover {
+  background-color: rgba(255,255,255,.2);
+}
+
+.root button + button {
+  margin-left: 30px;
+}
+
+.transmitting {
+  background-color: white;
+  color: #555;
+  animation: breathe alternate forwards infinite linear 2s;
+}
+
+.success {
+  background-color: hsla(120, 50%, 50%, .9);
+  color: white;
+}
+
+.failed {
+  background-color: hsla(350, 60%, 50%, .8);
+  color: white;
+}
+
+@keyframes breathe {
+  from { opacity: .9; }
+  to { opacity: .6; }
+}

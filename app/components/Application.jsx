@@ -3,6 +3,7 @@ import Instructions from './Instructions';
 import TaskList from './TaskList';
 import Comments from './Comments';
 import ThankYou from './ThankYou';
+import TransmissionStatus, {TRANSMITTING, SUCCESS, FAILED} from './TransmissionStatus';
 import styles from './Application.css';
 import {serialize, deserialize}  from '../utils/store';
 import {generateSlug} from '../utils/generate-slug';
@@ -15,6 +16,13 @@ export default class Application extends Component {
     this._tasksChanged = this._tasksChanged.bind(this);
     this._commentsChanged = this._commentsChanged.bind(this);
     this._transmit = this._transmit.bind(this);
+    this._transmissionStatusDismissed = this._transmissionStatusDismissed.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.state.transmissionStatus === TRANSMITTING) {
+      this._transmissionStatusDismissed();
+    }
   }
 
   componentDidUpdate() {
@@ -22,12 +30,16 @@ export default class Application extends Component {
   }
 
   render() {
+    const {transmissionStatus, comments, tasks} = this.state;
     return (
       <div className={styles.root}>
         <Instructions/>
-        <TaskList tasks={this.state.tasks} changed={this._tasksChanged} />
-        <Comments comments={this.state.comments} changed={this._commentsChanged}/>
+        <TaskList tasks={tasks} changed={this._tasksChanged} />
+        <Comments comments={comments} changed={this._commentsChanged}/>
         <ThankYou transmit={this._transmit}/>
+        <TransmissionStatus status={transmissionStatus}
+                            dismiss={this._transmissionStatusDismissed}
+                            retry={this._transmit} />
       </div>
     );
   }
@@ -52,13 +64,14 @@ export default class Application extends Component {
   }
 
   _transmit() {
+    this.setState({transmissionStatus: TRANSMITTING});
     fetch('/responses', {
       method: 'post',
       body: JSON.stringify(this.state)
-    }).then(response => response.ok && this._notifySuccess());
+    }).then(({status}) => this.setState({transmissionStatus: status < 400 ? SUCCESS : FAILED}));
   }
 
-  _notifySuccess() {
-    alert('whee!');
+  _transmissionStatusDismissed() {
+    this.setState({transmissionStatus: null});
   }
 }
