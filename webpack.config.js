@@ -49,7 +49,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: `${pkg.name} v${pkg.version}`,
       hash: true,
-      xhtml: true
+      xhtml: true,
+      favicon: 'favicon.png'
     }),
     new webpack.ProvidePlugin({
       fetch: 'isomorphic-fetch',
