@@ -47,6 +47,9 @@ module.exports = {
       title: `${pkg.name} v${pkg.version}`,
       hash: true,
       xhtml: true
+    }),
+    new webpack.ProvidePlugin({
+      fetch: 'isomorphic-fetch',
     })
   ]
 };
