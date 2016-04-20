@@ -5,6 +5,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pkg = require('./package.json');
 
+const event = process.env.EVENT || 'demo';
+
 module.exports = {
   context: path.join(__dirname, 'app'),
   entry: './index.js',
@@ -24,7 +26,7 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist', event),
     filename: 'bundle.js'
   },
 
@@ -35,7 +37,8 @@ module.exports = {
     loaders: [
       {test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/},
       {test: /\.css$/, loader: 'style!css?module&localIdentName=[name]__[local]'},
-      {test: /\.(png|jpg|gif)$/, loader: 'file'}
+      {test: /\.(png|jpg|gif)$/, loader: 'file', exclude: /\/events\//},
+      {test: /\.png$/, loader: `file?name=[name].[ext]`, include: /\/events\//}
     ]
   },
 
@@ -50,10 +53,13 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       fetch: 'isomorphic-fetch',
+      '__TASKS__': path.resolve(__dirname, 'events', event)
     })
   ]
 };
 
 if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = 'source-map';
+  module.exports.output.publicPath = `/${event}/`;
   module.exports.plugins.push(new webpack.optimize.UglifyJsPlugin())
 }

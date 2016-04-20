@@ -13,6 +13,9 @@
     "es6": true,
     "node": true
   },
+  "globals": {
+    "__TASKS__": false
+  },
   "extends": ["plugin:react/recommended"],
   "rules": {
     "comma-dangle": 1,
